@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 
 const projectRouter = require("./projects/projectRouter");
+const actionRouter = require("./actions/actionRouter");
 const db = require("./data/helpers/projectModel");
 
 const server = express();
@@ -12,6 +13,7 @@ server.use(helmet());
 server.use(express.json());
 server.use(logger);
 server.use("/", projectRouter);
+server.use("/:id/actions", actionRouter);
 
 server.get("/", (req, res) => {
   db.get()
